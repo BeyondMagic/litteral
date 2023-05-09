@@ -12,7 +12,5 @@ int main (const int argc, const char **argv)
   }
 
   const std::string_view filename(argv[1]);
-  fmt::print("I know what love is and this file name is \"{}\".\n", filename);
-
   Lyrics lyrics(filename);
 }

@@ -20,24 +20,24 @@ struct Lyrics
 auto
 Lyrics::read_path (const std::filesystem::path& path)
 {
-  std::vector<std::string_view> contents;
-
   // Sanity check.
   if (!std::filesystem::is_regular_file(path))
-      return contents;
+    throw "Did not found such file.";
 
   // Open the file:
   // Note that we have to use binary mode as we want to return a string
   // representing matching the bytes of the file on the file system.
   std::ifstream file(path, std::ios::in | std::ios::binary);
   if (!file.is_open())
-      return contents;
+    throw "File could not be read.";
 
   // Read contents
-  for (std::string line; std::getline(file, line);)
-  contents.emplace_back(line);
+  std::vector<std::string_view> contents;
 
-  // Close the file
+  for (std::string line; std::getline(file, line);)
+    contents.emplace_back(line);
+
+  // Close the file.
   file.close();
 
   return contents;
@@ -47,5 +47,5 @@ Lyrics::Lyrics (const std::string_view &filename)
 {
   const auto path = std::filesystem::path(filename);
 
-  this->text = read_path(filename);
+  this->text = this->read_path(filename);
 }
