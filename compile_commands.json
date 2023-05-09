@@ -1,0 +1,26 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++2b",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-pedantic",
+      "-Wconversion",
+      "-Wsign-conversion",
+      "-fwrapv",
+      "-ftrivial-auto-var-init=zero",
+      "-fsanitize-undefined-trap-on-error",
+      "-fsanitize-address-use-after-scope",
+      "-fsanitize=address,undefined",
+      "-o",
+      "distribution/binary",
+      "source/main.cpp"
+    ],
+    "directory": "/home/dream/Programming/Projects/litteral",
+    "file": "/home/dream/Programming/Projects/litteral/source/main.cpp",
+    "output": "/home/dream/Programming/Projects/litteral/distribution/binary"
+  }
+]

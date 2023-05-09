@@ -1,0 +1,3 @@
+# For 'ccls' cache folder.
+# 'ccls' is the language server I am using to compile
+**/.ccls-cache/
