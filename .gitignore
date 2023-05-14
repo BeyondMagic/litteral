@@ -1,3 +1,12 @@
+# No binaries in source code!
+/distribution/
+
+# No LSP auxiliar files.
+/compile_commands.json
+
 # For 'ccls' cache folder.
 # 'ccls' is the language server I am using to compile
 **/.ccls-cache/
+
+# For testing.
+/samples/
