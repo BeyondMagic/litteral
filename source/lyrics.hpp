@@ -33,10 +33,25 @@ Lyrics::read ()
 {
   for (auto it = text.begin(); it != text.end() - 1; it++)
   {
-    const auto this_line_ms = time_to_miliseconds(*it);
-    const auto next_line_ms = time_to_miliseconds(*(it + 1));
-    std::this_thread::sleep_for(std::chrono::milliseconds(next_line_ms - this_line_ms));
-    std::cout << *it << '\n';
+    const auto line = *it;
+    const auto line_next = *(it + 1);
+
+    if (line.empty())
+    {
+      std::cout << '\n';
+      continue;
+    }
+
+    const auto end_brackes_pos = line.find(']');
+    const auto clean_line       =      line.substr(end_brackes_pos + 1);
+    const auto string_time      =      line.substr(1, end_brackes_pos);
+    const auto string_time_next = line_next.substr(1, line_next.find(']'));
+
+    Time time{string_time};
+    Time time_next{string_time_next};
+
+    std::cout << clean_line << '\n';
+    std::this_thread::sleep_for(std::chrono::milliseconds(time_next.miliseconds - time.miliseconds));
   }
 }
 
