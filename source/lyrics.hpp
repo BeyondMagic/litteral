@@ -1,22 +1,44 @@
 #include <filesystem>
 #include <string_view>
 #include <fstream>
+#include <iostream>
 #include <vector>
+#include <format>
+#include <thread>
+#include <chrono>
+
+#include "time.hpp"
 
 struct Lyrics
 {
   Lyrics  (const std::string_view &);
   ~Lyrics ()=default;
-  std::vector<std::string> text;
 
   auto clean_text ();
+  auto read ();
+
+  std::vector<std::string> text;
 
   private:
-    [[nodiscard]] auto read_path (const std::filesystem::path&);
+    [[nodiscard]]
+    auto
+    read_path (const std::filesystem::path&);
 
     //size_t line = 0;
     //size_t running = 0;
 };
+
+auto
+Lyrics::read ()
+{
+  for (auto it = text.begin(); it != text.end() - 1; it++)
+  {
+    const auto this_line_ms = time_to_miliseconds(*it);
+    const auto next_line_ms = time_to_miliseconds(*(it + 1));
+    std::this_thread::sleep_for(std::chrono::milliseconds(next_line_ms - this_line_ms));
+    std::cout << *it << '\n';
+  }
+}
 
 auto
 Lyrics::clean_text ()
