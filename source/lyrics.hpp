@@ -7,16 +7,38 @@ struct Lyrics
 {
   Lyrics  (const std::string_view &);
   ~Lyrics ()=default;
+  std::vector<std::string> text;
+
+  auto clean_text ();
 
   private:
-    auto read_path (const std::filesystem::path&);
+    [[nodiscard]] auto read_path (const std::filesystem::path&);
 
-    std::vector<std::string_view> text;
     //size_t line = 0;
     //size_t running = 0;
 };
 
-[[nodiscard]]
+auto
+Lyrics::clean_text ()
+{
+  std::vector<std::string> new_text;
+
+  for (auto it = text.begin(); it != text.end(); it++)
+  {
+    std::istringstream is(*it);
+
+    /* TODO: Add flag to show metainformation of the lyrics.
+     *       Currently it just ignores. */
+    char a, b, c, d;
+    is >> a >> b >> c >> d;
+
+    if (not (a == '[' and std::isalpha(b) and std::isalpha(c) and d == ':'))
+      new_text.emplace_back(*it);
+  }
+
+  text.swap(new_text);
+}
+
 auto
 Lyrics::read_path (const std::filesystem::path& path)
 {
@@ -32,7 +54,7 @@ Lyrics::read_path (const std::filesystem::path& path)
     throw "File could not be read.";
 
   // Read contents
-  std::vector<std::string_view> contents;
+  std::vector<std::string> contents;
 
   for (std::string line; std::getline(file, line);)
     contents.emplace_back(line);

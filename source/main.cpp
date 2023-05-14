@@ -14,6 +14,12 @@ int main (const int argc, const char **argv)
   const std::string_view filename(argv[1]);
   try {
     Lyrics lyrics(filename);
+
+    lyrics.clean_text();
+
+    for (const auto &line : lyrics.text)
+      fmt::print("LINE = {}\n", line);
+
   } catch (char const *message) {
     fmt::print(stderr, "{}\n", message);
     return EXIT_FAILURE;
