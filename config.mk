@@ -8,12 +8,12 @@ FILE = source/main.cpp
 #---------------------------------------------
 # C++ standard version
 
-#FLAGS := $(FLAGS) 
+#FLAGS := $(FLAGS)
 
 #---------------------------------------------
 # -- Libs.
 
-LIBS := -lfmt
+#LIBS := -lfmt
 
 #---------------------------------------------
 # -- Debugging.

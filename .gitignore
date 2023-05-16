@@ -10,3 +10,6 @@
 
 # For testing.
 /samples/
+
+# Ignore PDF created from autocompilation .md files.
+*.pdf

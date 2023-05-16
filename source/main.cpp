@@ -16,9 +16,7 @@ int main (const int argc, const char **argv)
   try
   {
     Lyrics lyrics(filename);
-
     lyrics.clean_text();
-
     lyrics.read();
   }
   catch (char const *message)
